@@ -26,6 +26,9 @@ pipeline{
             }
         }
         stage ('4-closing'){
+            when {
+                branche 'feature'
+            }
             steps{
                 sh 'free -g'
                 echo "We are done"
