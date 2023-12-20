@@ -27,7 +27,7 @@ pipeline{
         }
         stage ('4-closing'){
             steps{
-                sh 'logname'
+                sh 'free -g'
                 echo "We are done"
             }
         }
