@@ -27,7 +27,7 @@ pipeline{
         }
         stage ('4-closing'){
             when {
-                branche 'feature'
+                branch 'feature'
             }
             steps{
                 sh 'free -g'
