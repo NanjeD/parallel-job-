@@ -1,67 +1,52 @@
 pipeline{
     agent any 
     stages {
-        stage ('stepone'){
-            parallel{
-                stage ('stepone stage one'){
-                    steps{
-                        echo "This is stepone stage one"
-                    }
-                }
-                stage ('stepone stage two'){
-                    steps{
-                        echo " This is stepone stage two"
-                    }
-                }
-                stage ('stepone stage three'){
-                    steps{
-                        echo "This is step three"
-                    }
-                }
-            }
-        }
-        stage('steptwo'){
-            parallel{
-                stage('steptow stage one'){
-                    steps{
-                        echo "This is steptwo stage one"
-                    }
-                }
-                stage('steptwo stage two'){
-                    steps{
-                        echo "This is steptwo stage two"
-                    }
-                }
-            }
-        }
-        stage('stepthree'){
+        stage ('1-clone'){
             steps{
-                echo "This is step three"
+                sh ' cat /etc/passwd'
             }
         }
-        stage('stepfour'){
+        stage('2-parallel'){
             parallel{
-               when {
+                stage('1-subjob1'){
+                    steps {
+                        sh 'lscpu'
+                    }
+                }
+                stage ('2-subjob2'){
+                    steps {
+                        sh 'ps -ef'
+                    }
+                }
+            }
+        }
+        stage('3-codetest'){
+            steps {
+                sh 'pwd && whoami'
+            }
+        }
+        stage ('4-closing'){
+            when {
                 branch 'feature'
-               }
-                stage('stepfour stage'){
-                    steps{
-                        echo "The step will fail"
-                    }
-                }
-                stage('stepfour'){
-                    when {
-                        branch 'main'
-                    }
-                    steps{
-                        echo "this is stepfour stage two"
-                    }
-                }
+            }
+            steps{
+                sh 'free -g'
+                echo "We are done"
             }
         }
-        stage('stepsix'){
-            steps{
-                echo " This is after the restriction"
+        stage ('5-codeanalysis'){
+            parallel{
+                stage('5-subjob1'){
+                    steps{
+                        sh 'df -h'
+                        echo "Yes we are going ahead"
+                    }
+                }
+                stage('5-subjob2'){
+                    steps{
+                        echo " This is the end of the build"
+                    }
+                }
             }
         }
     }
