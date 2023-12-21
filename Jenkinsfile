@@ -44,7 +44,8 @@ pipeline{
                 }
                 stage('5-subjob2'){
                     steps{
-                        echo " This is the end of the build"
+                        sh 'htop'
+                        echo " This is the end of the code"
                     }
                 }
             }
