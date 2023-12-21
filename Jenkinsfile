@@ -39,5 +39,25 @@ pipeline{
                 echo "This is step three"
             }
         }
+        stage('stepfour'){
+            parallel{
+                stage('stepfour stage one'){
+                    when{
+                        branch 'feature'
+                    }
+                    steps{
+                        echo "I am sleeping"
+                    }
+                }
+                stage('stepfour'){
+                    when{
+                        branch 'main'
+                    }
+                    steps{
+                        echo "This is up"
+                    }
+                }
+            }
+        }
     }
 }
