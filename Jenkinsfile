@@ -50,9 +50,6 @@ pipeline{
                     }
                 }
                 stage('stepfour'){
-                    when{
-                        branch 'main'
-                    }
                     steps{
                         echo "This is up"
                     }
