@@ -1,49 +1,42 @@
 pipeline{
     agent any 
     stages {
-        stage ('1-clone'){
-            steps{
-                sh ' cat /etc/passwd'
-            }
-        }
-        stage('2-parallel'){
+        stage ('stepone'){
             parallel{
-                stage('1-subjob1'){
-                    steps {
-                        sh 'lscpu'
+                stage ('stepone stage one'){
+                    steps{
+                        echo "This is stepone stage one"
                     }
                 }
-                stage ('2-subjob2'){
-                    steps {
-                        sh 'ps -ef'
+                stage ('stepone stage two'){
+                    steps{
+                        echo " This is stepone stage two"
+                    }
+                }
+                stage ('stepone stage three'){
+                    steps{
+                        echo "This is step three"
                     }
                 }
             }
         }
-        stage('3-codetest'){
-            steps {
-                sh 'pwd && whoami'
-            }
-        }
-        stage ('4-closing'){
-            steps{
-                sh 'free -g'
-                echo "We are done"
-            }
-        }
-        stage ('5-codeanalysis'){
+        stage('steptwo'){
             parallel{
-                stage('5-subjob1'){
+                stage('steptow stage one'){
                     steps{
-                        sh 'df -h'
-                        echo "Yes we are going ahead"
+                        echo "This is steptwo stage one"
                     }
                 }
-                stage('5-subjob2'){
+                stage('steptwo stage two'){
                     steps{
-                        echo " This is the end of the build"
+                        echo "This is steptwo stage two"
                     }
                 }
+            }
+        }
+        stage('stepthree'){
+            steps{
+                echo "This is step three"
             }
         }
     }
