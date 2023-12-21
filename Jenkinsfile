@@ -39,5 +39,28 @@ pipeline{
                 echo "This is step three"
             }
         }
+        stage('stepfour'){
+            parallel{
+                when
+                branch 'feature'
+                stage('stepfour stage'){
+                    steps{
+                        echo "The step will fail"
+                    }
+                }
+                stage('stepfour'){
+                    when 
+                    branch 'main'
+                    steps{
+                        echo "this is stepfour stage two"
+                    }
+                }
+            }
+        }
+        stage('stepsix'){
+            steps{
+                echo " This is after the restriction"
+            }
+        }
     }
 }
