@@ -54,6 +54,11 @@ pipeline{
                         echo "This is up"
                     }
                 }
+                stage('last step'){
+                    steps{
+                        echo "The last build"
+                    }
+                }
             }
         }
     }
