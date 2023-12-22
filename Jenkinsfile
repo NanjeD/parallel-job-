@@ -1,5 +1,7 @@
 pipeline{
-    agent any 
+    agent {
+        label 'slave1'
+    }
     stages {
         stage ('stepone'){
             parallel{
@@ -14,6 +16,9 @@ pipeline{
                     }
                 }
                 stage ('stepone stage three'){
+                    agen{
+                        label 'slave2'
+                    }
                     steps{
                         echo "This is step three"
                     }
@@ -23,6 +28,9 @@ pipeline{
         stage('steptwo'){
             parallel{
                 stage('steptow stage one'){
+                    agent{
+                        label 'slave1'
+                    }
                     steps{
                         echo "This is steptwo stage one"
                     }
@@ -35,6 +43,9 @@ pipeline{
             }
         }
         stage('stepthree'){
+            agent{
+                label 'slave2'
+            }
             steps{
                 echo "This is step three"
             }
