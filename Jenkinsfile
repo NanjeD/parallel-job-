@@ -16,7 +16,7 @@ pipeline{
                     }
                 }
                 stage ('stepone stage three'){
-                    agen{
+                    agent{
                         label 'slave2'
                     }
                     steps{
