@@ -74,7 +74,7 @@ pipeline{
         }
         stage('scripted'){
             steps{
-                sh 'bash -x /var/lib/jenkins/workspace/parallel-demo/demo.sh'
+                sh 'ps -ef'
             }
         }
     }
