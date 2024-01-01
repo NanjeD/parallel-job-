@@ -17,7 +17,7 @@ pipeline{
                 }
                 stage ('stepone stage three'){
                     agent{
-                        label 'slave2'
+                        label 'slave1'
                     }
                     steps{
                         echo "This is step three"
@@ -44,7 +44,7 @@ pipeline{
         }
         stage('stepthree'){
             agent{
-                label 'slave2'
+                label 'slave1'
             }
             steps{
                 echo "This is step three"
